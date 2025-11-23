@@ -12,7 +12,45 @@
         WindowState="Maximized">
 
     <Window.Resources>
+        <Style x:Key="BorderButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!-- Border, на который действует Trigger -->
+                            <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="40"
+                            BorderThickness="1"
+                            BorderBrush="Blue"/>
 
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                            <!-- Наведение -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border"
+                                Property="Background"
+                                Value="#FFDEEFFF"/>
+                            </Trigger>
+
+                            <!-- Нажатие -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border"
+                                Property="Background"
+                                Value="#FFBAD7FF"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <!-- Цвета -->
         <SolidColorBrush x:Key="PrimaryColor" Color="#D32F2F"/>
         <SolidColorBrush x:Key="PrimaryLight" Color="#FF6659"/>
@@ -140,9 +178,31 @@
                     <RowDefinition/>
                     <RowDefinition Height="85"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                 HorizontalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="ChatWindow" Grid.Row="0" >
                 </StackPanel>
+                </ScrollViewer>
                 <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="30" Margin="12">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="65"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="1" BorderBrush="Blue" BorderThickness="1" Margin="5" CornerRadius="40">
+
+                                <Button Content="Текст"
+                                    Style="{StaticResource BorderButton}"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" Click="UserMessageSend_Click"/>
+                            </Border>
+                            <TextBox x:Name="userMessageField" Grid.Column="0"
+                                    Text="Write, smth"
+                                    VerticalAlignment="Center"
+                                    Margin="5"/>
+                        </Grid>
+                    </Border>
                 </Border>
             </Grid>
         </Grid>
