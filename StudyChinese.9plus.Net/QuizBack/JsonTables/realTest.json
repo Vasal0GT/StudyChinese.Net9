@@ -1,0 +1,72 @@
+{
+  "Id": "2f6a3e4c-8a12-41d8-9f07-9d8e0f3c49a1",
+  "Name": "Учебная таблица",
+  "Description": "Пример викторины: математика, русский язык, китайский язык",
+  "RowNumber": 3,
+  "ColumnNumber": 3,
+  "Questions": [
+    {
+      "ConnectedTable": "main",
+      "Guess": "Сколько будет 2+2?",
+      "Answer": "4",
+      "Column": 0,
+      "Row": 0
+    },
+    {
+      "ConnectedTable": "main",
+      "Guess": "Чему равен корень из 9?",
+      "Answer": "3",
+      "Column": 1,
+      "Row": 0
+    },
+    {
+      "ConnectedTable": "main",
+      "Guess": "5 * 6 = ?",
+      "Answer": "30",
+      "Column": 2,
+      "Row": 0
+    },
+    {
+      "ConnectedTable": "main",
+      "Guess": "Сколько букв в слове 'ёжик'?",
+      "Answer": "4",
+      "Column": 0,
+      "Row": 1
+    },
+    {
+      "ConnectedTable": "main",
+      "Guess": "Правильно ли: ЖЫ → ЖИ?",
+      "Answer": "Нет, правильно ЖИ",
+      "Column": 1,
+      "Row": 1
+    },
+    {
+      "ConnectedTable": "main",
+      "Guess": "Сколько падежей в русском языке?",
+      "Answer": "6",
+      "Column": 2,
+      "Row": 1
+    },
+    {
+      "ConnectedTable": "main",
+      "Guess": "Как будет 'привет' по-китайски?",
+      "Answer": "你好 (Nǐ hǎo)",
+      "Column": 0,
+      "Row": 2
+    },
+    {
+      "ConnectedTable": "main",
+      "Guess": "Сколько тонов в китайском языке?",
+      "Answer": "4 (плюс нейтральный)",
+      "Column": 1,
+      "Row": 2
+    },
+    {
+      "ConnectedTable": "main",
+      "Guess": "Что значит иероглиф '人'?",
+      "Answer": "Человек",
+      "Column": 2,
+      "Row": 2
+    }
+  ]
+}

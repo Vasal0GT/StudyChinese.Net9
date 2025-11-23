@@ -1,0 +1,710 @@
+﻿<Window x:Class="StudyChinese._9plus.Net.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow"
+        WindowState="Maximized"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Black">
+    <Window.Resources>
+        <Style x:Key="CardBorder" TargetType="Border">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" Direction="315" ShadowDepth="2" Opacity="0.1" BlurRadius="10"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="1.05" Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
+                                <DoubleAnimation To="1.05" Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
+                                <DoubleAnimation To="0.2" Duration="0:0:0.2" Storyboard.TargetProperty="(Effect).Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
+                                <DoubleAnimation To="1" Duration="0:0:0.2" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
+                                <DoubleAnimation To="0.1" Duration="0:0:0.2" Storyboard.TargetProperty="(Effect).Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                  HorizontalScrollBarVisibility="Disabled">
+
+
+        <Grid Name="mainGrid" Background="#FEF2F2" Height="{Binding ViewportHeight, ElementName=scroller}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" MaxHeight="150" MinHeight="100"/>
+                <RowDefinition Height="3.5*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="700" MaxHeight="700"/>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="1*" MaxHeight="150" MinHeight="100"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="5"
+        Margin="120 20 120 90"
+        Background="#FFEFEF"
+        BorderBrush="#FF9797"
+        BorderThickness="2"
+        CornerRadius="12"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+                <Viewbox Stretch="Uniform"
+             MaxWidth="1000"
+             MaxHeight="200"
+             Margin="0 0 0 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="0"
+                                    Margin="5 5 5 5">
+                            <TextBlock Text="💡Советы по иучению"
+                        Foreground="Black"
+                        FontSize="6"
+                        TextAlignment="Left"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                            <TextBlock Text="• Занимайтесь каждый день хотя бы 15 минут"
+                        Foreground="Black"
+                         FontSize="8"
+                        TextAlignment="Left"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                            <TextBlock Text="• Практикуйте произношения тонов"
+                        Foreground="Black"
+                         FontSize="8"
+                        TextAlignment="Left"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                            <TextBlock Text="• Изучайте иероглифы в кнотексте"
+                        Foreground="Black"
+                         FontSize="8"
+                        TextAlignment="Left"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Grid.Column="1"
+                                    Margin="5 5 5 5">
+                            <TextBlock Text=""
+                        Foreground="Black"
+                        FontSize="6"
+                        TextAlignment="Left"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                            <TextBlock Text="• Слуйшайте китайскую речь"
+                        Foreground="Black"
+                         FontSize="8"
+                        TextAlignment="Left"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                            <TextBlock Text="• Повторяйте пройденный материал"
+                        Foreground="Black"
+                         FontSize="8"
+                        TextAlignment="Left"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                            <TextBlock Text="• Не бойтесь делать ошибки"
+                        Foreground="Black"
+                         FontSize="8"
+                        TextAlignment="Left"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Grid>
+                </Viewbox>
+            </Border>
+            <Viewbox Grid.Row="2" Margin="0 20 0 15" MaxHeight="50">
+                <TextBlock
+                       Text="Выберите игру"
+                       Foreground="#9F0712"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            </Viewbox>
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" Background="#FFFFFF" BorderBrush="{x:Null}" BorderThickness="0" CornerRadius="10" Padding="20" Margin="30 30 30 30" Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" CornerRadius="7" Padding="5" HorizontalAlignment="Right" 
+                                    VerticalAlignment="Top" Background="#DBEAFE" Margin="0 0 10 0">
+                                <TextBlock Text="难度: 中等" Foreground="Blue" FontSize="16"/>
+                            </Border>
+                            <Image Grid.Column="0" Source="Image\icons\quiz.png" Width="42" Margin="10,7,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="Викторина" FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBlock 
+                            FontSize="15"
+                            Text="Выберите тему и сложность вопроса. Дайте ответ и заработайте баллы. Чем сложнее вопрос, тем больше баллов!" TextWrapping="Wrap"/>
+                        <Button Content="Начать игру" Width="250" Height="50" Margin="0 27 0 0" Click="Button_Click_2">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <!-- Базовые свойства -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="#FFA2A2"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+
+                                    <!-- Шаблон кнопки -->
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="6" 
+                                Padding="10,5">
+                                                    <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <!-- Триггеры -->
+                                    <Style.Triggers>
+                                        <!-- При наведении -->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <!-- При нажатии -->
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#B22222"/>
+                                            <!-- чуть темнее красный -->
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" Background="#FFFFFF" BorderBrush="{x:Null}" BorderThickness="0" CornerRadius="10" Padding="10" Margin="30 30 30 30" Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" CornerRadius="7" Padding="5" HorizontalAlignment="Right" 
+                                    VerticalAlignment="Top" Background="#DBEAFE" Margin="0 0 10 0">
+                                <TextBlock Text="难度: Optional" Foreground="Blue" FontSize="16"/>
+                            </Border>
+                            <Image Grid.Column="0" Source="Image/icons/sand-clock.png" Width="42" Margin="10,7,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="Диалог с НейроДругом, китайским НейроДругом" FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBlock 
+                            FontSize="15"
+                            Text="Пообщайтесь в переписке с ИИ асистентом на базе Deepseek, также можно настроить и выбрать уровень вашего собеседника от Hsk1 до Hsk6" TextWrapping="Wrap"/>
+                        <Button Content="Начать играть" Width="250" Height="50" Margin="0 27 0 0" Click="Button_Click_AIChatting">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <!-- Базовые свойства -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="#FFA2A2"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+
+                                    <!-- Шаблон кнопки -->
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="6" 
+                                Padding="10,5">
+                                                    <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <!-- Триггеры -->
+                                    <Style.Triggers>
+                                        <!-- При наведении -->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <!-- При нажатии -->
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#B22222"/>
+                                            <!-- чуть темнее красный -->
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="2" Background="#FFFFFF" BorderBrush="{x:Null}" BorderThickness="0" CornerRadius="10" Padding="10" Margin="30 30 30 30" Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" CornerRadius="7" Padding="5" HorizontalAlignment="Right" 
+                 VerticalAlignment="Top" Background="#DBEAFE" Margin="0 0 10 0">
+                                <TextBlock Text="难度: ???" Foreground="Blue" FontSize="16"/>
+                            </Border>
+                            <Image Grid.Column="0" Source="Image/icons/sand-clock.png" Width="42" Margin="10,7,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="Еще в разработке..." FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBlock 
+         FontSize="15"
+         Text="Работаем над тем чтобы создать больше интересных и полезных упражнений для изуения китайского языка" TextWrapping="Wrap"/>
+                        <Button Content="Еще в разработке" Width="250" Height="50" Margin="0 27 0 0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <!-- Базовые свойства -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="#FFA2A2"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+
+                                    <!-- Шаблон кнопки -->
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+             BorderBrush="{TemplateBinding BorderBrush}" 
+             BorderThickness="{TemplateBinding BorderThickness}" 
+             CornerRadius="6" 
+             Padding="10,5">
+                                                    <ContentPresenter HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           RecognizesAccessKey="True"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <!-- Триггеры -->
+                                    <Style.Triggers>
+                                        <!-- При наведении -->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <!-- При нажатии -->
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#B22222"/>
+                                            <!-- чуть темнее красный -->
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" Background="#FFFFFF" BorderBrush="{x:Null}" BorderThickness="0" CornerRadius="10" Padding="10" Margin="30 30 30 30" Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" CornerRadius="7" Padding="5" HorizontalAlignment="Right" 
+                 VerticalAlignment="Top" Background="#DBEAFE" Margin="0 0 10 0">
+                                <TextBlock Text="难度: ???" Foreground="Blue" FontSize="16"/>
+                            </Border>
+                            <Image Grid.Column="0" Source="Image/icons/sand-clock.png" Width="42" Margin="10,7,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="Еще в разработке..." FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBlock 
+         FontSize="15"
+         Text="Работаем над тем чтобы создать больше интересных и полезных упражнений для изуения китайского языка" TextWrapping="Wrap"/>
+                        <Button Content="Еще в разработке" Width="250" Height="50" Margin="0 27 0 0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <!-- Базовые свойства -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="#FFA2A2"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+
+                                    <!-- Шаблон кнопки -->
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+             BorderBrush="{TemplateBinding BorderBrush}" 
+             BorderThickness="{TemplateBinding BorderThickness}" 
+             CornerRadius="6" 
+             Padding="10,5">
+                                                    <ContentPresenter HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           RecognizesAccessKey="True"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <!-- Триггеры -->
+                                    <Style.Triggers>
+                                        <!-- При наведении -->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <!-- При нажатии -->
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#B22222"/>
+                                            <!-- чуть темнее красный -->
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1" Background="#FFFFFF" BorderBrush="{x:Null}" BorderThickness="0" CornerRadius="10" Padding="10" Margin="30 30 30 30" Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" CornerRadius="7" Padding="5" HorizontalAlignment="Right" 
+                 VerticalAlignment="Top" Background="#DBEAFE" Margin="0 0 10 0">
+                                <TextBlock Text="难度: ???" Foreground="Blue" FontSize="16"/>
+                            </Border>
+                            <Image Grid.Column="0" Source="Image/icons/sand-clock.png" Width="42" Margin="10,7,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="Еще в разработке..." FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBlock 
+         FontSize="15"
+         Text="Работаем над тем чтобы создать больше интересных и полезных упражнений для изуения китайского языка" TextWrapping="Wrap"/>
+                        <Button Content="Еще в разработке" Width="250" Height="50" Margin="0 27 0 0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <!-- Базовые свойства -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="#FFA2A2"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+
+                                    <!-- Шаблон кнопки -->
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+             BorderBrush="{TemplateBinding BorderBrush}" 
+             BorderThickness="{TemplateBinding BorderThickness}" 
+             CornerRadius="6" 
+             Padding="10,5">
+                                                    <ContentPresenter HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           RecognizesAccessKey="True"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <!-- Триггеры -->
+                                    <Style.Triggers>
+                                        <!-- При наведении -->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <!-- При нажатии -->
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#B22222"/>
+                                            <!-- чуть темнее красный -->
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="2" Background="#FFFFFF" BorderBrush="{x:Null}" BorderThickness="0" CornerRadius="10" Padding="10" Margin="30 30 30 30" Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" CornerRadius="7" Padding="5" HorizontalAlignment="Right" 
+                 VerticalAlignment="Top" Background="#DBEAFE" Margin="0 0 10 0">
+                                <TextBlock Text="难度: ???" Foreground="Blue" FontSize="16"/>
+                            </Border>
+                            <Image Grid.Column="0" Source="Image/icons/sand-clock.png" Width="42" Margin="10,7,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="Еще в разработке..." FontWeight="Bold" Margin="0,10,0,5"/>
+                        <TextBlock 
+         FontSize="15"
+         Text="Работаем над тем чтобы создать больше интересных и полезных упражнений для изуения китайского языка" TextWrapping="Wrap"/>
+                        <Button Content="Еще в разработке" Width="250" Height="50" Margin="0 27 0 0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <!-- Базовые свойства -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="#FFA2A2"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+
+                                    <!-- Шаблон кнопки -->
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+             BorderBrush="{TemplateBinding BorderBrush}" 
+             BorderThickness="{TemplateBinding BorderThickness}" 
+             CornerRadius="6" 
+             Padding="10,5">
+                                                    <ContentPresenter HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           RecognizesAccessKey="True"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <!-- Триггеры -->
+                                    <Style.Triggers>
+                                        <!-- При наведении -->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <!-- При нажатии -->
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#B22222"/>
+                                            <!-- чуть темнее красный -->
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Border Grid.Row="3"
+        Margin="120 0 120 0"
+        Background="#FFE2E2"
+        BorderBrush="#FFA2A2"
+        BorderThickness="2"
+        CornerRadius="12"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+                <Viewbox Stretch="Uniform"
+             MaxWidth="1000"
+             MaxHeight="200"
+             Margin="15">
+                    <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                        <TextBlock Text="🔐 Войдите в аккаунт для сохранения прогресса и разблокировки новых уровней"
+                        Foreground="Black"
+                        FontSize="16"
+                        TextAlignment="Center"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                        <TextBlock Text="Создать аккаунт или войти."
+                        Foreground="Black"
+                         FontSize="16"
+                        TextAlignment="Center"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Viewbox>
+            </Border>
+
+            <Border Grid.Row="1"
+                    Margin="120 18 120 18"
+                    Background="#D40009"
+                    BorderBrush="Black"
+                    BorderThickness="0.1"
+                    CornerRadius="18"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    MaxHeight="300"
+                    >
+                <Grid>
+                    <Image Source="Image/CN1.jpg"
+                           Opacity="0.5"
+                           Stretch="Fill" />
+
+
+                    <Viewbox Stretch="Uniform" 
+                        MaxWidth="800"
+                        MaxHeight="300">
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="欢迎学习中文！"
+                                       Foreground="White"
+                                       FontSize="24" 
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold" />
+                            <TextBlock Text="Добро пожаловать в изучение китайского языка!"
+                                       Foreground="White"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center" />
+                            <TextBlock Text="Выберите игру и начните свое путешествие в мир китайского языка"
+                                       Foreground="White"
+                                       FontSize="16"
+                                       HorizontalAlignment="Center"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="0" Background="#D40009">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button 
+                    Grid.Column="10" Content="Выход" FontSize="22" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Foreground="White" Margin="0,0,0,0" Click="Button_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#D40009"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center" 
+                                            RecognizesAccessKey="True"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <TextBlock Grid.Column="0"
+                           Text="CN"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="30"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="学习中文"
+                                   Margin="15,0,0,3"
+                       Foreground="White"
+                       FontWeight="Bold"
+                       FontSize="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="1" Text="Изучение китайского языка"
+                       Margin="15 0 0 10"
+                       FontSize="28"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="7" Background="#D40009">
+                <StackPanel>
+                    <TextBlock
+                        Foreground="#E9E9E9"
+                        Text="Приложение для изучения китайского языка • 学习中文应用程序"
+                        FontSize="20"
+                        HorizontalAlignment="Center"
+                        Margin="0 10 0 5"
+                        TextWrapping="Wrap"/>
+                    <TextBlock
+                         Foreground="#E9E9E9"
+                         Text="Удачи в изучении! 祝你学习顺利！"
+                         FontSize="20"
+                         HorizontalAlignment="Center"
+                         Margin="0 10 0 5"
+                         TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Window>

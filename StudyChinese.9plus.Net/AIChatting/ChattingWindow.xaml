@@ -1,0 +1,150 @@
+﻿<Window x:Class="StudyChinese._9plus.Net.AIChatting.ChattingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Управление викторинами" Height="528" Width="824"
+        Background="#FFF5F5"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowState="Maximized">
+
+    <Window.Resources>
+
+        <!-- Цвета -->
+        <SolidColorBrush x:Key="PrimaryColor" Color="#D32F2F"/>
+        <SolidColorBrush x:Key="PrimaryLight" Color="#FF6659"/>
+        <SolidColorBrush x:Key="PrimaryDark" Color="#9A0007"/>
+        <SolidColorBrush x:Key="BorderGray" Color="#CCCCCC"/>
+
+        <!-- Тень -->
+        <DropShadowEffect x:Key="CardShadow" 
+                          Color="#000" 
+                          Direction="315"
+                          ShadowDepth="2" 
+                          Opacity="0.15"
+                          BlurRadius="12"/>
+
+        <!-- Основной стиль ToggleButton -->
+        <Style x:Key="HSKToggleButton" TargetType="ToggleButton">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
+            <Setter Property="Padding" Value="10 6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <!-- Наведение -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryLight}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryDark}"/>
+                            </Trigger>
+
+                            <!-- Выбрана -->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryDark}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryDark}"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.3"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                            <!-- Нажатие -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.96" ScaleY="0.96"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Эксклюзивная группа (только одна выбрана) -->
+        <Style x:Key="ExclusiveToggleGroup" TargetType="ToggleButton" BasedOn="{StaticResource HSKToggleButton}">
+            <EventSetter Event="Checked" Handler="ToggleButton_Checked"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя панель -->
+        <Border Grid.Row="0" Background="{StaticResource PrimaryColor}"/>
+        <TextBlock x:Name="testField" Text="123" Foreground="White" Grid.Row="0"/>
+        <!-- Основная сетка -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!-- Левое меню -->
+            <Border BorderThickness="1" BorderBrush="Gray" Padding="20">
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="95"/>
+                        <RowDefinition Height="95"/>
+                        <RowDefinition Height="95"/>
+                    </Grid.RowDefinitions>
+
+                    <ToggleButton Grid.Column="0" Margin="10" Grid.Row="0" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK1"/>
+                    <ToggleButton Grid.Column="1" Margin="10" Grid.Row="0" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK2"/>
+                    <ToggleButton Grid.Column="0" Margin="10" Grid.Row="1" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK3"/>
+                    <ToggleButton Grid.Column="1" Margin="10" Grid.Row="1" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK4"/>
+                    <ToggleButton Grid.Column="0" Margin="10" Grid.Row="2" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK5"/>
+                    <ToggleButton Grid.Column="1" Margin="10" Grid.Row="2" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK6"/>
+
+                </Grid>
+            </Border>
+
+            <!-- Правая часть -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="85"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                </StackPanel>
+                <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1">
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

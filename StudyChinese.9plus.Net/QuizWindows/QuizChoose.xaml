@@ -1,0 +1,163 @@
+﻿<Window x:Class="StudyChinese._9plus.Net.QuizWindows.QuizChoose"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudyChinese._9plus.Net.QuizWindows"
+        mc:Ignorable="d"
+        Title="Выбор викторины" Height="600" Width="800"
+        Background="#FFF5F5"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowState="Maximized"
+        MouseDoubleClick="QuizList_MouseDoubleClick">
+    <Window.Resources>
+        <!-- Эффект тени -->
+        <DropShadowEffect x:Key="CardShadow" 
+                          Color="#000000" 
+                          Direction="315" 
+                          ShadowDepth="2" 
+                          Opacity="0.1" 
+                          BlurRadius="10"/>
+
+        <!-- Кнопка назад -->
+        <Style x:Key="BackButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E0E0E0"/>
+                    <Setter Property="Foreground" Value="#666666"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+            <!-- Шапка -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,30">
+                <Button x:Name="BackButton" Style="{StaticResource BackButton}" Content="←" Click="BackButton_Click"/>
+                <TextBlock Text="Выбор викторины"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="#333333"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <!-- Общий прямоугольник с розовой рамкой -->
+            <Border Background="White" CornerRadius="10" Padding="30" Width="800" BorderBrush="#FFA2A2" BorderThickness="2" Effect="{StaticResource CardShadow}">
+                <StackPanel>
+
+                    <TextBlock Text="Список доступных викторин"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Foreground="#333333"
+                               Margin="0,0,0,20"/>
+
+                    <!-- Список викторин -->
+                    <ListBox x:Name="QuizList"
+                             Height="300"
+                             BorderThickness="1"
+                             BorderBrush="#FFA2A2"
+                             Background="#FFD7D7"
+                             Foreground="#333333"
+                             FontSize="16"
+                             SelectionMode="Single">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Margin" Value="0,5"/>
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderBrush" Value="#FFA2A2"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border Background="{TemplateBinding Background}" 
+                                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                                    CornerRadius="6"
+                                                    Padding="{TemplateBinding Padding}">
+                                                <ContentPresenter />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FFECEC"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+
+                    <!-- Кнопка открыть -->
+                    <Button Content="Открыть викторину" Width="250" Height="50" Margin="0 20 0 0" Click="Button_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderBrush" Value="#FFA2A2"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" 
+                                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                                    CornerRadius="6" 
+                                                    Padding="10,5">
+                                                <ContentPresenter HorizontalAlignment="Center" 
+                                                                  VerticalAlignment="Center"
+                                                                  RecognizesAccessKey="True"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#B22222"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>

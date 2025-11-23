@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <RootNamespace>StudyChinese._9plus.Net</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Image\CN.png" />
+    <None Remove="Image\CN1.jpg" />
+    <None Remove="Image\icons\quiz.png" />
+    <None Remove="Image\icons\sand-clock.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ater.DeepSeek.Core" Version="1.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Image\CN.png" />
+    <Resource Include="Image\CN1.jpg" />
+    <Resource Include="Image\icons\quiz.png" />
+    <Resource Include="Image\icons\sand-clock.png" />
+  </ItemGroup>
+
+</Project>
