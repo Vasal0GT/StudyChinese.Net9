@@ -9,9 +9,36 @@
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="NoResize"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        KeyDown="SendButton_KeyDown">
 
     <Window.Resources>
+        <Style x:Key="BackButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E0E0E0"/>
+                    <Setter Property="Foreground" Value="#666666"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="BorderButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -140,8 +167,19 @@
         </Grid.RowDefinitions>
 
         <!-- Верхняя панель -->
-        <Border Grid.Row="0" Background="{StaticResource PrimaryColor}"/>
-        <TextBlock x:Name="testField" Text="123" Foreground="White" Grid.Row="0"/>
+        <Border Grid.Row="0" Background="{StaticResource PrimaryColor}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="255"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="HSK汉语学习助手" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="30"/>
+                <TextBlock Grid.Column="0" Text="|" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="35" Margin="0 0 0 11"/>
+                <TextBlock Grid.Column="1" Text="AI对话式中文学习平台" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="30"/>
+                <Button Grid.Column="2" x:Name="BackButton" Style="{StaticResource BackButton}" Content="←" HorizontalAlignment="Right" Margin="0 0 10 0" Click="BackButton_Click"/>
+            </Grid>
+        </Border>
         <!-- Основная сетка -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -150,40 +188,66 @@
             </Grid.ColumnDefinitions>
             <!-- Левое меню -->
             <Border BorderThickness="1" BorderBrush="Gray" Padding="20">
-                <Grid Grid.Column="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="95"/>
-                        <RowDefinition Height="95"/>
-                        <RowDefinition Height="95"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="190"/>
                     </Grid.RowDefinitions>
 
-                    <ToggleButton Grid.Column="0" Margin="10" Grid.Row="0" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK1"/>
-                    <ToggleButton Grid.Column="1" Margin="10" Grid.Row="0" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK2"/>
-                    <ToggleButton Grid.Column="0" Margin="10" Grid.Row="1" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK3"/>
-                    <ToggleButton Grid.Column="1" Margin="10" Grid.Row="1" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK4"/>
-                    <ToggleButton Grid.Column="0" Margin="10" Grid.Row="2" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK5"/>
-                    <ToggleButton Grid.Column="1" Margin="10" Grid.Row="2" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK6"/>
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="95"/>
+                            <RowDefinition Height="95"/>
+                            <RowDefinition Height="95"/>
+                        </Grid.RowDefinitions>
+
+                        <ToggleButton Grid.Column="0" Margin="10" Grid.Row="0" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK1"/>
+                        <ToggleButton Grid.Column="1" Margin="10" Grid.Row="0" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK2"/>
+                        <ToggleButton Grid.Column="0" Margin="10" Grid.Row="1" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK3"/>
+                        <ToggleButton Grid.Column="1" Margin="10" Grid.Row="1" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK4"/>
+                        <ToggleButton Grid.Column="0" Margin="10" Grid.Row="2" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK5"/>
+                        <ToggleButton Grid.Column="1" Margin="10" Grid.Row="2" Style="{StaticResource ExclusiveToggleGroup}" Content="HSK6"/>
+
+                    </Grid>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="Please choose chat mode" Grid.Row="1"/>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="95"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <ToggleButton Grid.Column="0" Margin="10" Grid.Row="0" Style="{StaticResource ExclusiveToggleGroup}" Content="Teacher"/>
+                        <ToggleButton Grid.Column="1" Margin="10" Grid.Row="0" Style="{StaticResource ExclusiveToggleGroup}" Content="Friend"/>
+
+                    </Grid>
                 </Grid>
             </Border>
 
             <!-- Правая часть -->
             <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="381*"/>
+                    <ColumnDefinition Width="193*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="85"/>
                 </Grid.RowDefinitions>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                 HorizontalScrollBarVisibility="Disabled">
-                <StackPanel x:Name="ChatWindow" Grid.Row="0" >
-                </StackPanel>
+                 HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2">
+                    <StackPanel x:Name="ChatWindow" Grid.Row="0" >
+                    </StackPanel>
                 </ScrollViewer>
-                <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1">
+                <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" Grid.ColumnSpan="2">
                     <Border BorderBrush="Black" BorderThickness="1" CornerRadius="30" Margin="12">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -192,15 +256,19 @@
                             </Grid.ColumnDefinitions>
                             <Border Grid.Column="1" BorderBrush="Blue" BorderThickness="1" Margin="5" CornerRadius="40">
 
-                                <Button Content="Текст"
+                                <Button Content="отправить" FontSize="9"
                                     Style="{StaticResource BorderButton}"
                                     HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch" Click="UserMessageSend_Click"/>
+                                    VerticalAlignment="Stretch" Click="UserMessageSend_Click"
+                                    />
                             </Border>
                             <TextBox x:Name="userMessageField" Grid.Column="0"
                                     Text="Write, smth"
                                     VerticalAlignment="Center"
-                                    Margin="5"/>
+                                    Margin="13 0 10 0"
+                                    Background="#FFF5F5"
+                                    BorderThickness="0"
+                                     FontSize="36"/>
                         </Grid>
                     </Border>
                 </Border>

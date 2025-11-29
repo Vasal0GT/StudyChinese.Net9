@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="Image\CN.png" />
     <None Remove="Image\CN1.jpg" />
+    <None Remove="Image\icons\live-chat.png" />
     <None Remove="Image\icons\quiz.png" />
     <None Remove="Image\icons\sand-clock.png" />
   </ItemGroup>
@@ -24,6 +25,7 @@
   <ItemGroup>
     <Resource Include="Image\CN.png" />
     <Resource Include="Image\CN1.jpg" />
+    <Resource Include="Image\icons\live-chat.png" />
     <Resource Include="Image\icons\quiz.png" />
     <Resource Include="Image\icons\sand-clock.png" />
   </ItemGroup>

@@ -233,7 +233,7 @@
                                     VerticalAlignment="Top" Background="#DBEAFE" Margin="0 0 10 0">
                                 <TextBlock Text="难度: Optional" Foreground="Blue" FontSize="16"/>
                             </Border>
-                            <Image Grid.Column="0" Source="Image/icons/sand-clock.png" Width="42" Margin="10,7,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                            <Image Grid.Column="0" Source="Image/icons/live-chat.png" Width="42" Margin="10,7,0,0" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
                         </Grid>
                         <TextBlock FontSize="15" Text="Диалог с НейроДругом, китайским НейроДругом" FontWeight="Bold" Margin="0,10,0,5"/>
                         <TextBlock 
