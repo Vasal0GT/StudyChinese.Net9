@@ -1,4 +1,5 @@
 ﻿using StudyChinese._9plus.Net.AIChatting;
+using StudyChinese._9plus.Net.LearnCards;
 using System.Windows;
 
 namespace StudyChinese._9plus.Net
@@ -31,6 +32,13 @@ namespace StudyChinese._9plus.Net
         {
             ChattingWindow chattingWindow = new ChattingWindow();
             chattingWindow.Show();
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            LearnCardMenu learnCards = new LearnCardMenu();
+            learnCards.Show();
             this.Close();
         }
     }

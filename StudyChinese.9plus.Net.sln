@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyChinese.9plus.Net", "S
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "StudyChineseNet9", "StudyChineseNet9\StudyChineseNet9.vdproj", "{D9D2D027-23E8-DE7A-3E6F-B312AA9492DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject2", "TestProject2\TestProject2.csproj", "{38D6DEFA-0522-4E56-AABA-419793F81483}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{5579881F-2FA1-4AEB-B51A-CB4145D0DEEA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D9D2D027-23E8-DE7A-3E6F-B312AA9492DC}.Debug|Any CPU.ActiveCfg = Debug
 		{D9D2D027-23E8-DE7A-3E6F-B312AA9492DC}.Release|Any CPU.ActiveCfg = Release
+		{38D6DEFA-0522-4E56-AABA-419793F81483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D6DEFA-0522-4E56-AABA-419793F81483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D6DEFA-0522-4E56-AABA-419793F81483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D6DEFA-0522-4E56-AABA-419793F81483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

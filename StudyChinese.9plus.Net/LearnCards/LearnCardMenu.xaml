@@ -1,0 +1,382 @@
+﻿<Window x:Class="StudyChinese._9plus.Net.LearnCards.LearnCardMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LearnCardMenu"
+        WindowState="Maximized"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#FEF2F2">
+
+    <Window.Resources>
+
+        <!-- Стиль карточки (как в MainWindow) -->
+        <Style x:Key="RedActionButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#D40009"/>
+            <Setter Property="BorderBrush" Value="#D40009"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="12"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+
+                <!-- Hover -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <!-- HOVER -->
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+
+                                <!-- Увеличение -->
+                                <DoubleAnimation To="1.05" Duration="0:0:0.15"
+                                 Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
+                                <DoubleAnimation To="1.05" Duration="0:0:0.15"
+                                 Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
+
+                                <!-- В красный -->
+                                <ColorAnimation To="#FFD40009" Duration="0:0:0.15"
+                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"/>
+                                <ColorAnimation To="White" Duration="0:0:0.15"
+                                Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"/>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+
+                    <!-- ВОЗВРАТ ОБРАТНО -->
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+
+                                <!-- Вернуть размер -->
+                                <DoubleAnimation To="1" Duration="0:0:0.15"
+                                 Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
+                                <DoubleAnimation To="1" Duration="0:0:0.15"
+                                 Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
+
+                                <!-- Вернуть цвет -->
+                                <ColorAnimation To="White" Duration="0:0:0.15"
+                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"/>
+                                <ColorAnimation To="#D40009" Duration="0:0:0.15"
+                                Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"/>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+
+                <!-- Press -->
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Opacity" Value="0.85"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+
+        <Style x:Key="BackButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E0E0E0"/>
+                    <Setter Property="Foreground" Value="#666666"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="CardBorder" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000"
+                                      Direction="315"
+                                      ShadowDepth="2"
+                                      Opacity="0.15"
+                                      BlurRadius="15"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="1.03" Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
+                                <DoubleAnimation To="1.03" Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation To="1" Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
+                                <DoubleAnimation To="1" Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <TextBlock Grid.Row="0"
+                   Text="📚 Ваши наборы карточек"
+                   Foreground="Black"
+                   FontSize="42"
+                   FontWeight="Bold"
+                   Margin="40"
+                   HorizontalAlignment="Center"/>
+        <Button Grid.Row="0" x:Name="BackButton" Style="{StaticResource BackButton}" Content="←" HorizontalAlignment="Right" Margin="0 0 10 0" Click="BackButton_Click"/>
+
+        <!-- Контейнер карточек -->
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl>
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="2" Columns="2"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <!-- ==== КАРТОЧКА 1 ==== -->
+                <Border Style="{StaticResource CardBorder}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="1"
+                                   FontSize="40"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#D40009"/>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="HSK 1 — Базовые слова"
+                                       FontSize="22"
+                                       FontWeight="Bold"/>
+                            <TextBlock Text="Всего слов: 120"
+                                       FontSize="16"/>
+                            <TextBlock Text="Осталось выучить: 35"
+                                       FontSize="16"
+                                       Foreground="Gray"/>
+                        </StackPanel>
+
+                        <Button Grid.Column="2"
+                                Content="Повторить"
+                                FontSize="18"
+                                Margin="10"
+                                Background="White"
+                                BorderBrush="#D40009"
+                                BorderThickness="2"
+                                Cursor="Hand"
+                                Style="{StaticResource RedActionButton}"/>
+                    </Grid>
+                </Border>
+
+                <!-- ==== КАРТОЧКА 2 ==== -->
+                <Border Style="{StaticResource CardBorder}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="2"
+                                   FontSize="40"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#D40009"/>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Фразы для общения"
+                                       FontSize="22"
+                                       FontWeight="Bold"/>
+                            <TextBlock Text="Всего слов: 75"
+                                       FontSize="16"/>
+                            <TextBlock Text="Осталось выучить: 12"
+                                       FontSize="16"
+                                       Foreground="Gray"/>
+                        </StackPanel>
+
+                        <Button Grid.Column="2"
+                                Content="Повторить"
+                                FontSize="18"
+                                Margin="10"
+                                Background="White"
+                                BorderBrush="#D40009"
+                                BorderThickness="2"
+                                Cursor="Hand"
+                                Style="{StaticResource RedActionButton}"/>
+                    </Grid>
+                </Border>
+
+                <!-- ==== КАРТОЧКА 3 ==== -->
+                <Border Style="{StaticResource CardBorder}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="3"
+                                   FontSize="40"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#D40009"/>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Еда и ресторан"
+                                       FontSize="22"
+                                       FontWeight="Bold"/>
+                            <TextBlock Text="Всего слов: 60"
+                                       FontSize="16"/>
+                            <TextBlock Text="Осталось выучить: 28"
+                                       FontSize="16"
+                                       Foreground="Gray"/>
+                        </StackPanel>
+
+                        <Button Grid.Column="2"
+                                Content="Повторить"
+                                FontSize="18"
+                                Margin="10"
+                                Background="White"
+                                BorderBrush="#D40009"
+                                BorderThickness="2"
+                                Cursor="Hand"
+                                Style="{StaticResource RedActionButton}"/>
+                    </Grid>
+                </Border>
+
+                <!-- ==== КАРТОЧКА 4 ==== -->
+                <Border Style="{StaticResource CardBorder}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="4"
+                                   FontSize="40"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#D40009"/>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Путешествия"
+                                       FontSize="22"
+                                       FontWeight="Bold"/>
+                            <TextBlock Text="Всего слов: 90"
+                                       FontSize="16"/>
+                            <TextBlock Text="Осталось выучить: 41"
+                                       FontSize="16"
+                                       Foreground="Gray"/>
+                        </StackPanel>
+
+                        <Button Grid.Column="2"
+                                Content="Повторить"
+                                FontSize="18"
+                                Margin="10"
+                                Background="White"
+                                BorderBrush="#D40009"
+                                BorderThickness="2"
+                                Cursor="Hand"
+                                Style="{StaticResource RedActionButton}"/>
+                    </Grid>
+                </Border>
+
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Кнопка добавления -->
+        <Button Grid.Row="2"
+                Content="➕ Добавить новый набор"
+                FontSize="26"
+                Margin="0 20 0 40"
+                HorizontalAlignment="Center"
+                Width="420"
+                Height="70"
+                Background="White"
+                BorderBrush="#D40009"
+                BorderThickness="3"
+                Cursor="Hand"
+                Style="{StaticResource RedActionButton}"/>
+    </Grid>
+</Window>
