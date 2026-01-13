@@ -2,6 +2,8 @@
 using StudyChinese._9plus.Net.LearnCards.CardsBack;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,13 +25,40 @@ namespace StudyChinese._9plus.Net.LearnCards
     public partial class LearnCardMenu : Window
     {
         static readonly string localDir = AppDomain.CurrentDomain.BaseDirectory;
+        public ObservableCollection<CardsBundle> Items { get; } = new();
         public LearnCardMenu()
         {
             InitializeComponent();
+            DataContext = this;
             CreateAndCheckDB();
             AddExampleCollections();
+            Loaded +=  SavedBundles_Loaded;
         }
+        private async void SavedBundles_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadBundlesAsync();
+        }
+        private async Task LoadBundlesAsync()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
 
+                //тут типо каждый набор надо вытаскивать из бд и добавлять в Items
+                using (var db = new LiteDatabase(localDir + "StudyCnDB.db"))
+                {
+                    var dataBase = db.GetCollection<CardsBundle>("CardBundles")
+                    .Query()
+                    .OrderBy(x => x.Name)
+                    .ToList();
+
+                    foreach (var a in dataBase)
+                    {
+                        Items.Add(a);
+                    }
+
+                }
+            });
+        }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
@@ -52,51 +81,63 @@ namespace StudyChinese._9plus.Net.LearnCards
         {
             using (var db = new LiteDatabase(localDir +  "StudyCnDB.db"))
             {
-                if (!db.CollectionExists("CardBundles"))
+                if (db.CollectionExists("CardBundles"))
                 {
                     var cardBunlesCollection = db.GetCollection<CardsBundle>("CardBundles");
+                    cardBunlesCollection.DeleteAll();
 
                     var HSK1 = new CardsBundle("HSK1", 100, 0);
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus1", "Chn", 1));
+                    HSK1.Cards.Add(new Card("Привет", "你好", 0));
+                    HSK1.Cards.Add(new Card("Спасибо", "谢谢", 0));
+                    HSK1.Cards.Add(new Card("Не, нет", "不", 0));
+                    HSK1.Cards.Add(new Card("Быть, является", "是", 0));
+                    HSK1.Cards.Add(new Card("Я, меня", "我", 0));
+                    HSK1.Cards.Add(new Card("Ты, вы", "你", 0));
+                    HSK1.Cards.Add(new Card("Хороший, хорошо", "好", 0));
+                    HSK1.Cards.Add(new Card("Частица вопроса", "吗", 0));
+                    HSK1.Cards.Add(new Card("Что, какой", "什么", 0));
+                    HSK1.Cards.Add(new Card("Человек, люди", "人", 0));
                     cardBunlesCollection.Insert(HSK1);
 
                     var HSK2 = new CardsBundle("HSK2", 200, 0);
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
+                    HSK2.Cards.Add(new Card("Rus2", "Chn", 1));
                     cardBunlesCollection.Insert(HSK2);
 
-                    var HSK3 = new CardsBundle("HSK2", 300, 0);
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    HSK1.Cards.Add(new Card("Rus3", "Chn", 1));
-                    cardBunlesCollection.Insert(HSK2);
+                    var HSK3 = new CardsBundle("HSK3", 300, 0);
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    HSK3.Cards.Add(new Card("Rus3", "Chn", 1));
+                    cardBunlesCollection.Insert(HSK3);
                 }
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string cardBundleName = string.Empty;
+           if(sender is Button button)
+           {
+                cardBundleName = button.Tag.ToString();
+           }
+           CardsMemoryGame cardsMemoryGame = new CardsMemoryGame(cardBundleName);
+           cardsMemoryGame.Show();
+           this.Close();
+        }
     }
 }

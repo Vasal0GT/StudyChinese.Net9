@@ -39,6 +39,10 @@ namespace TestProject2
                 //проверяем на случайный элемент
                 if (a.Name == "HSK1")
                     secondCheckPoint = true;
+                foreach (var b in a.Cards)
+                {
+                    _output.WriteLine($"{b.RusTranslation} {b.ChnTranslation} {b.SolveStatus}");
+                }
             }
             _output.WriteLine($"second result: {secondCheckPoint}");
 

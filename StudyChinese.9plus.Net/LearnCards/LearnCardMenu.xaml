@@ -198,7 +198,7 @@
 
         <!-- Контейнер карточек -->
         <ScrollViewer Grid.Row="1">
-            <ItemsControl>
+            <ItemsControl ItemsSource="{Binding Items}">
 
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -206,34 +206,35 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                <!-- ==== КАРТОЧКА 1 ==== -->
-                <Border Style="{StaticResource CardBorder}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource CardBorder}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="1"
+                                <TextBlock Text="1"
                                    FontSize="40"
                                    FontWeight="Bold"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Foreground="#D40009"/>
 
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Text="HSK 1 — Базовые слова"
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding Name}"
                                        FontSize="22"
                                        FontWeight="Bold"/>
-                            <TextBlock Text="Всего слов: 120"
+                                    <TextBlock Text="{Binding NumberOfWords, StringFormat='Всего слов: {0}'}"
                                        FontSize="16"/>
-                            <TextBlock Text="Осталось выучить: 35"
+                                    <TextBlock Text="{Binding LeftWords, StringFormat='Слов осталось: {0}' }"
                                        FontSize="16"
                                        Foreground="Gray"/>
-                        </StackPanel>
+                                </StackPanel>
 
-                        <Button Grid.Column="2"
+                                <Button Grid.Column="2"
                                 Content="Повторить"
                                 FontSize="18"
                                 Margin="10"
@@ -241,126 +242,15 @@
                                 BorderBrush="#D40009"
                                 BorderThickness="2"
                                 Cursor="Hand"
-                                Style="{StaticResource RedActionButton}"/>
-                    </Grid>
-                </Border>
+                                Style="{StaticResource RedActionButton}"
+                                Tag = "{Binding Name}"
+                                Click="Button_Click"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
 
-                <!-- ==== КАРТОЧКА 2 ==== -->
-                <Border Style="{StaticResource CardBorder}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Text="2"
-                                   FontSize="40"
-                                   FontWeight="Bold"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Foreground="#D40009"/>
-
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Text="Фразы для общения"
-                                       FontSize="22"
-                                       FontWeight="Bold"/>
-                            <TextBlock Text="Всего слов: 75"
-                                       FontSize="16"/>
-                            <TextBlock Text="Осталось выучить: 12"
-                                       FontSize="16"
-                                       Foreground="Gray"/>
-                        </StackPanel>
-
-                        <Button Grid.Column="2"
-                                Content="Повторить"
-                                FontSize="18"
-                                Margin="10"
-                                Background="White"
-                                BorderBrush="#D40009"
-                                BorderThickness="2"
-                                Cursor="Hand"
-                                Style="{StaticResource RedActionButton}"/>
-                    </Grid>
-                </Border>
-
-                <!-- ==== КАРТОЧКА 3 ==== -->
-                <Border Style="{StaticResource CardBorder}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Text="3"
-                                   FontSize="40"
-                                   FontWeight="Bold"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Foreground="#D40009"/>
-
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Text="Еда и ресторан"
-                                       FontSize="22"
-                                       FontWeight="Bold"/>
-                            <TextBlock Text="Всего слов: 60"
-                                       FontSize="16"/>
-                            <TextBlock Text="Осталось выучить: 28"
-                                       FontSize="16"
-                                       Foreground="Gray"/>
-                        </StackPanel>
-
-                        <Button Grid.Column="2"
-                                Content="Повторить"
-                                FontSize="18"
-                                Margin="10"
-                                Background="White"
-                                BorderBrush="#D40009"
-                                BorderThickness="2"
-                                Cursor="Hand"
-                                Style="{StaticResource RedActionButton}"/>
-                    </Grid>
-                </Border>
-
-                <!-- ==== КАРТОЧКА 4 ==== -->
-                <Border Style="{StaticResource CardBorder}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Text="4"
-                                   FontSize="40"
-                                   FontWeight="Bold"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Foreground="#D40009"/>
-
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Text="Путешествия"
-                                       FontSize="22"
-                                       FontWeight="Bold"/>
-                            <TextBlock Text="Всего слов: 90"
-                                       FontSize="16"/>
-                            <TextBlock Text="Осталось выучить: 41"
-                                       FontSize="16"
-                                       Foreground="Gray"/>
-                        </StackPanel>
-
-                        <Button Grid.Column="2"
-                                Content="Повторить"
-                                FontSize="18"
-                                Margin="10"
-                                Background="White"
-                                BorderBrush="#D40009"
-                                BorderThickness="2"
-                                Cursor="Hand"
-                                Style="{StaticResource RedActionButton}"/>
-                    </Grid>
-                </Border>
+ 
 
             </ItemsControl>
         </ScrollViewer>
