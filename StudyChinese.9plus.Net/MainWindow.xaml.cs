@@ -37,7 +37,7 @@ namespace StudyChinese._9plus.Net
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            LearnCardMenu learnCards = new LearnCardMenu();
+            var learnCards = new LearnCardMenu();
             learnCards.Show();
             this.Close();
         }

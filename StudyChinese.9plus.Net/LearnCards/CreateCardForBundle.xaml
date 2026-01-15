@@ -1,0 +1,160 @@
+﻿<Window x:Class="StudyChinese._9plus.Net.LearnCards.CreateCardForBundle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudyChinese._9plus.Net.LearnCards"
+        mc:Ignorable="d"
+        Title="Создание карточки"
+        WindowState="Maximized"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#FEF2F2"
+        SnapsToDevicePixels="True"
+        UseLayoutRounding="True">
+
+
+    <Window.Resources>
+        <Style x:Key="BackButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E0E0E0"/>
+                    <Setter Property="Foreground" Value="#666666"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Тень карточек -->
+        <DropShadowEffect x:Key="CardShadow"
+                          Color="#000000"
+                          Direction="315"
+                          ShadowDepth="2"
+                          Opacity="0.1"
+                          BlurRadius="10"/>
+
+        <!-- Универсальная кнопка -->
+        <Style x:Key="CardButton" TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFA2A2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#B22222"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- TextBox в стиле карточек -->
+        <Style x:Key="CardTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="#FFA2A2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="BackButton"
+                Style="{StaticResource BackButton}" Content="←"  
+                Margin="15 15 10 0" Click="BackButton_Click"/>
+        <!-- Центральная карточка -->
+        <Border Width="500"
+                Padding="40"
+                Background="White"
+                CornerRadius="12"
+                BorderBrush="#FFA2A2"
+                BorderThickness="2"
+                Effect="{StaticResource CardShadow}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+            <StackPanel>
+
+                <!-- Заголовок -->
+                <TextBlock Text="Создание новой карточки"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="#333333"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,30"/>
+
+                <!-- Название набора -->
+                <TextBlock Text="Перевод на русском"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Foreground="#555555"
+                           Margin="0,0,0,8"/>
+
+                <TextBox x:Name="SetRusTextBox"
+                         Style="{StaticResource CardTextBox}"
+                         />
+                <TextBlock Text="Слово на китайском"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Foreground="#555555"
+                           Margin="0,0,0,8"/>
+
+                <TextBox x:Name="SetChnTextBox"
+                         Style="{StaticResource CardTextBox}"
+                         />
+
+                <!-- Кнопка -->
+                <Button Content="Сохранить карточку"
+                        Width="260"
+                        Margin="0,30,0,0"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource CardButton}"
+                        Click="SaveCard_Click"/>
+
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>
+
